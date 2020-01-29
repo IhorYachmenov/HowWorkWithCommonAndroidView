@@ -2,19 +2,18 @@ package com.example.justjava;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
+
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
+
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import org.w3c.dom.Text;
 
-import java.text.NumberFormat;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -29,27 +28,16 @@ public class MainActivity extends AppCompatActivity {
 
     public void submitOrder(View view) {
 
-       String message =  "Amount due " + (quantity * 5) +
-               "\nThat would be $" + (quantity * 5) + " please." +
-               "\nYou owe " + (quantity * 5) + " bucks, dude!" +
-               "\n" + (quantity * 5) + " dollars for " + quantity + " cups of coffee. Pay up." +
-               "\nTotal = $" + (quantity * 5);
 
         CheckBox toppings = (CheckBox) findViewById(R.id.toppingCheckBox);
         CheckBox chocolate = (CheckBox) findViewById(R.id.chocolate_checkbox);
 
-       int price = calculatePrice(toppings.isChecked(), chocolate.isChecked());
-       String priceMessage = "Total: $" + price;
-       message = message + "\nWhoo";
 
-       //-------------------------------------------------------------
+        //-------------------------------------------------------------
 
         //Add whipped cream? true
 
-        //CheckBox toppings = (CheckBox) findViewById(R.id.toppingCheckBox);
-       // CheckBox chocolate = (CheckBox) findViewById(R.id.chocolate_checkbox);
         TextView orderSummaryTextView = (TextView) findViewById(R.id.order_summary_text_view);
-        //Button orderButton = (Button) findViewById(R.id.order_button);
         EditText nameOfClient = (EditText) findViewById(R.id.name_of_client);
 
         boolean forLogInfo = toppings.isChecked();
@@ -59,22 +47,8 @@ public class MainActivity extends AppCompatActivity {
         Log.v("MainActivity", "name " + nameInfo);
 
         String name = "Jack";
-        // displayMessage(createOrderSummary(name));
-
-        /*if (orderButton.isPressed() && toppings.isChecked()) {
-            displayMessage(createOrderSummary(name));
-            orderSummaryTextView.setText(createOrderSummary(name));
-        } else {
-            //orderSummaryTextView.setText("Please select a toppings");
-            orderSummaryTextView.setText(createOrderSummary(name));
-
-        }*/
-        //displayMessage(createOrderSummary(name));
 
         orderSummaryTextView.setText(createOrderSummary(name));
-
-
-//       displayPrice(price);
 
     }
 
@@ -107,30 +81,53 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void increment(View view) {
-       // int quantity = 3;
+
+        if (quantity == 100 && quantity >= 100) {
+
+//            Context context = getApplicationContext();
+//            CharSequence text = "You can`t take more than 100 cup of coffee ";
+//            int duration = Toast.LENGTH_SHORT;
+//
+//            Toast.makeText(context, text, duration).show();
+            Toast toast = Toast.makeText(this, "You can`t take mote than 100 cup of coffee", Toast.LENGTH_SHORT);
+
+            TextView toastColor = (TextView) toast.getView().findViewById(android.R.id.message);
+            toastColor.setTextColor(Color.RED);
+            toast.show();
+            return;
+        }
         quantity = quantity + 1;
         displayQuantity(quantity);
+
     }
 
     public void dicrement(View view) {
-      //  int quantity = 2;
+
+        if (quantity < 2 && quantity == 1) {
+
+//            Context context = getApplicationContext();
+//            CharSequence text = "You can`t take less than 1 cup of coffee ";
+//            int duration = Toast.LENGTH_SHORT;
+//
+//            Toast.makeText(context, text, duration).show();
+
+            Toast toast = Toast.makeText(this, "You can`t take less than 1 cup of coffee", Toast.LENGTH_SHORT);
+
+            TextView toastColor = (TextView) toast.getView().findViewById(android.R.id.message);
+            toastColor.setBackgroundColor((Color.parseColor("#000000")));
+            toastColor.setTextColor(Color.RED);
+            toast.show();
+            return;
+        }
+
         quantity = quantity - 1;
         displayQuantity(quantity);
+
     }
 
     private void displayQuantity(int string) {
-        TextView quantityTextView = (TextView) findViewById(
-                R.id.quantity_text_view);
+        TextView quantityTextView = (TextView) findViewById(R.id.quantity_text_view);
         quantityTextView.setText("" + string);
     }
 
-    private void displayPrice(int number) {
-        TextView orderSummaryTextView = (TextView) findViewById(R.id.order_summary_text_view);
-        orderSummaryTextView.setText(NumberFormat.getCurrencyInstance().format(number));
-    }
-
-    private void displayMessage(String message) {
-        TextView orderSummaryTextView = (TextView) findViewById(R.id.order_summary_text_view);
-        orderSummaryTextView.setText(message);
-    }
 }

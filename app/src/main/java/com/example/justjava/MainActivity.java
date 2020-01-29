@@ -2,18 +2,17 @@ package com.example.justjava;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-
+import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.AlarmClock;
 import android.util.Log;
 import android.view.View;
-
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
-
 
 public class MainActivity extends AppCompatActivity {
 
@@ -47,6 +46,17 @@ public class MainActivity extends AppCompatActivity {
         Log.v("MainActivity", "name " + nameInfo);
 
         String name = "Jack";
+
+
+
+        Intent intent = new Intent(Intent.ACTION_SENDTO);
+        intent.setData(Uri.parse("mailto:"));
+        intent.putExtra(Intent.EXTRA_SUBJECT, "Just Java order for " + nameOfClient.getText().toString());
+        intent.putExtra(Intent.EXTRA_TEXT, createOrderSummary(name));
+
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
 
         orderSummaryTextView.setText(createOrderSummary(name));
 

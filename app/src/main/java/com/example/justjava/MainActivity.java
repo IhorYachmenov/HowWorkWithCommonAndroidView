@@ -2,11 +2,14 @@ package com.example.justjava;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
@@ -16,6 +19,7 @@ import java.text.NumberFormat;
 public class MainActivity extends AppCompatActivity {
 
     int quantity = 2;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +35,10 @@ public class MainActivity extends AppCompatActivity {
                "\n" + (quantity * 5) + " dollars for " + quantity + " cups of coffee. Pay up." +
                "\nTotal = $" + (quantity * 5);
 
-       int price = calculatePrice();
+        CheckBox toppings = (CheckBox) findViewById(R.id.toppingCheckBox);
+        CheckBox chocolate = (CheckBox) findViewById(R.id.chocolate_checkbox);
+
+       int price = calculatePrice(toppings.isChecked(), chocolate.isChecked());
        String priceMessage = "Total: $" + price;
        message = message + "\nWhoo";
 
@@ -39,13 +46,17 @@ public class MainActivity extends AppCompatActivity {
 
         //Add whipped cream? true
 
-        CheckBox toppings = (CheckBox) findViewById(R.id.toppingCheckBox);
-        CheckBox chocolate = (CheckBox) findViewById(R.id.chocolate_checkbox);
+        //CheckBox toppings = (CheckBox) findViewById(R.id.toppingCheckBox);
+       // CheckBox chocolate = (CheckBox) findViewById(R.id.chocolate_checkbox);
         TextView orderSummaryTextView = (TextView) findViewById(R.id.order_summary_text_view);
-        Button orderButton = (Button) findViewById(R.id.order_button);
+        //Button orderButton = (Button) findViewById(R.id.order_button);
+        EditText nameOfClient = (EditText) findViewById(R.id.name_of_client);
 
         boolean forLogInfo = toppings.isChecked();
         Log.v("MainActivity", "Has whipped cream " + forLogInfo);
+
+        String nameInfo = nameOfClient.getText().toString();
+        Log.v("MainActivity", "name " + nameInfo);
 
         String name = "Jack";
         // displayMessage(createOrderSummary(name));
@@ -62,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
 
         orderSummaryTextView.setText(createOrderSummary(name));
 
+
 //       displayPrice(price);
 
     }
@@ -70,16 +82,28 @@ public class MainActivity extends AppCompatActivity {
 
         CheckBox toppings = (CheckBox) findViewById(R.id.toppingCheckBox);
         CheckBox chocolate = (CheckBox) findViewById(R.id.chocolate_checkbox);
-        return "Name: " + name +
+        EditText nameOfClient = (EditText) findViewById(R.id.name_of_client);
+
+        return "Name: " + nameOfClient.getText().toString() +
                 "\nAdd whipped cream? " + toppings.isChecked() +
                 "\nAdd chocolate?  " + chocolate.isChecked() +
                 "\nQuantity: " + quantity +
-                "\nTotal: $" + calculatePrice() +
+                "\nTotal: $" + calculatePrice(toppings.isChecked(), chocolate.isChecked()) +
                 "\nThank you!";
-        }
+    }
 
-    private int calculatePrice() {
-        return quantity * 5;
+
+    private int calculatePrice(boolean addWhippedCream, boolean addChocolate) {
+
+        int basePrice = 5;
+
+        if (addWhippedCream) {
+            basePrice = basePrice + 1;
+        }
+        if (addChocolate) {
+            basePrice = basePrice + 2;
+        }
+        return quantity * basePrice;
     }
 
     public void increment(View view) {
@@ -98,7 +122,6 @@ public class MainActivity extends AppCompatActivity {
         TextView quantityTextView = (TextView) findViewById(
                 R.id.quantity_text_view);
         quantityTextView.setText("" + string);
-
     }
 
     private void displayPrice(int number) {

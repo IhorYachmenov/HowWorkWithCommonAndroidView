@@ -12,7 +12,7 @@
     <!-- Translation pharases from order summary -->
 
     <string name="name_in_order_summary">Имя: </string>
-    <string name="add_whipped_cream_from_o_s">Добавить взбытые сливки? </string>
+    <string name="add_whipped_cream_from_o_s">"Добавить взбитые сливки? "</string>
     <string name="add_chocolate_from_o_s">Добавить шоколад? </string>
     <string name="quantity_from_o_s">Количество: </string>
     <string name="sum_from_o_s">Сума: $</string>

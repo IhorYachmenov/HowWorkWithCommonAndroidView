@@ -22,4 +22,11 @@
     <string name="toast_less_than">You can`t take less than 1 cup of coffee</string>
     <string name="toast_more_than">You can`t take mote than 100 cup of coffee</string>
 
+    <!-- Often strings contain text that should not be translated into other languages. -->
+    <!-- Example placeholder for a literal -->
+    <!-- <string name="promo_message">
+    Please use the "<xliff:g id="promotion_code">ABCDEFG</xliff:g>" to get a discount.
+</string>
+-->
+
 </resources>

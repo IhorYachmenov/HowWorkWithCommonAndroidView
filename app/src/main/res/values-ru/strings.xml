@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Just Java</string>
+    <string name="name_of_client">Введите свое имя</string>
+    <string name="toppings">ДОБАВКИ</string>
+    <string name="whipped_cream">Взбитые сливки</string>
+    <string name="chocolate">Шоколад</string>
+    <string name="quantity">КОЛИЧЕСТВО</string>
+    <string name="order_summary">ИТОГ ЗАКАЗА</string>
+    <string name="order_button">ЗАКАЗ</string>
+
+    <!-- Translation pharases from order summary -->
+
+    <string name="name_in_order_summary">Имя: </string>
+    <string name="add_whipped_cream_from_o_s">Добавить взбытые сливки? </string>
+    <string name="add_chocolate_from_o_s">Добавить шоколад? </string>
+    <string name="quantity_from_o_s">Количество: </string>
+    <string name="sum_from_o_s">Сума: $</string>
+    <string name="thank_you_from_o_s">Дякую!</string>
+
+    <!-- Toast message -->
+
+    <string name="toast_less_than">Ви не можете взять меньше чем 1 чашку кави</string>
+    <string name="toast_more_than">Ви не можете взять больше чем 100 чашек кави</string>
+
+</resources>

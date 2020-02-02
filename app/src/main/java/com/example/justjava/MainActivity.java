@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.AlarmClock;
 import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
@@ -18,7 +17,6 @@ public class MainActivity extends AppCompatActivity {
 
     int quantity = 2;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,10 +25,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void submitOrder(View view) {
 
-
         CheckBox toppings = (CheckBox) findViewById(R.id.toppingCheckBox);
         CheckBox chocolate = (CheckBox) findViewById(R.id.chocolate_checkbox);
-
 
         //-------------------------------------------------------------
 
@@ -46,8 +42,6 @@ public class MainActivity extends AppCompatActivity {
         Log.v("MainActivity", "name " + nameInfo);
 
         String name = "Jack";
-
-
 
         Intent intent = new Intent(Intent.ACTION_SENDTO);
         intent.setData(Uri.parse("mailto:"));
@@ -68,12 +62,12 @@ public class MainActivity extends AppCompatActivity {
         CheckBox chocolate = (CheckBox) findViewById(R.id.chocolate_checkbox);
         EditText nameOfClient = (EditText) findViewById(R.id.name_of_client);
 
-        return "Name: " + nameOfClient.getText().toString() +
-                "\nAdd whipped cream? " + toppings.isChecked() +
-                "\nAdd chocolate?  " + chocolate.isChecked() +
-                "\nQuantity: " + quantity +
-                "\nTotal: $" + calculatePrice(toppings.isChecked(), chocolate.isChecked()) +
-                "\nThank you!";
+        return getString(R.string.name_in_order_summary) + nameOfClient.getText().toString() +
+                "\n" + getString(R.string.add_whipped_cream_from_o_s) + toppings.isChecked() +
+                "\n" + getString(R.string.add_chocolate_from_o_s) + chocolate.isChecked() +
+                "\n" + getString(R.string.quantity_from_o_s) + quantity +
+                "\n" + getString(R.string.sum_from_o_s) + calculatePrice(toppings.isChecked(), chocolate.isChecked()) +
+                "\n" + getString(R.string.thank_you_from_o_s);
     }
 
 
@@ -99,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
 //            int duration = Toast.LENGTH_SHORT;
 //
 //            Toast.makeText(context, text, duration).show();
-            Toast toast = Toast.makeText(this, "You can`t take mote than 100 cup of coffee", Toast.LENGTH_SHORT);
+            Toast toast = Toast.makeText(this, getString(R.string.toast_more_than), Toast.LENGTH_SHORT);
 
             TextView toastColor = (TextView) toast.getView().findViewById(android.R.id.message);
             toastColor.setTextColor(Color.RED);
@@ -121,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
 //
 //            Toast.makeText(context, text, duration).show();
 
-            Toast toast = Toast.makeText(this, "You can`t take less than 1 cup of coffee", Toast.LENGTH_SHORT);
+            Toast toast = Toast.makeText(this, getString(R.string.toast_less_than), Toast.LENGTH_SHORT);
 
             TextView toastColor = (TextView) toast.getView().findViewById(android.R.id.message);
             toastColor.setBackgroundColor((Color.parseColor("#000000")));
